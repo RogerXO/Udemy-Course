@@ -11,11 +11,5 @@ namespace Udemy_Course
     {
         public string Name { set; get; }
         public double Price { set; get; }
-
-        public Product (string name, double price)
-        {
-            Name = name;
-            Price = price;
-        }
     }
 }

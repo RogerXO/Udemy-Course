@@ -17,7 +17,7 @@ namespace Udemy_Course
                 string productName = Console.ReadLine();
                 Console.Write("And it's price? ");
                 double productPrice = double.Parse(Console.ReadLine());
-                products[i] = new Product(productName, productPrice);
+                products[i] = new Product { Name = productName, Price = productPrice };
             }
 
             double sum = 0;
