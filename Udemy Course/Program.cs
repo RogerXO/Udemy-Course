@@ -9,6 +9,7 @@ int Sum(int[] numbers) {
     return sum;
 }
 
+//By using the params keyword, you can specify a method parameter that takes a variable number of arguments. The parameter type must be a single-dimensional array.
 int SumWithParams(params int[] numbers)
 {
     int sum = 0;
