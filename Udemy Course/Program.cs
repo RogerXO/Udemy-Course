@@ -1,75 +1,59 @@
 ﻿using System;
+using Udemy_Course;
 
-List<string> list = new List<string>() { "Ana", "Tamara", "Leticia", "Carlos", "Jairo" };
+List<Employee> employees = new();
 
-list.Add("Amanda");
-list.Insert(2, "Jussara");
+Console.Write("How many employees will be registered? ");
+int n = int.Parse(Console.ReadLine());
 
-foreach (string obj in list)
+Console.WriteLine();
+
+for (int i = 0; i < n; i ++ )
 {
-    Console.WriteLine(obj);
+    Console.WriteLine($"Employee #{i + 1}");
+    Console.Write("Id: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Employee repeatingId = employees.Find(x => x.Id == id);
+
+    while(repeatingId != null)
+    {
+        Console.WriteLine("This id is not available, please select other!");
+        Console.Write("id: ");
+        id = int.Parse(Console.ReadLine());
+        repeatingId = employees.Find(x => x.Id == id);
+    }
+
+    Console.Write("Name: ");
+    string name = Console.ReadLine();
+    Console.Write("Salary: ");
+    double salary = double.Parse(Console.ReadLine());
+
+    Console.WriteLine();
+
+    Employee employee = new(id, name, salary);
+    employees.Add(employee);
+}
+
+Console.Write("Enter the employee id that will have salary increase: ");
+int employeeId = int.Parse(Console.ReadLine());
+Employee employeeToIncreaseSalary = employees.Find(x => x.Id == employeeId);
+
+if(employeeToIncreaseSalary == null)
+{
+    Console.WriteLine("This id do not exist!");
+}
+else
+{
+    Console.Write("Enter the percentage: ");
+    double percentage = double.Parse(Console.ReadLine());
+    employeeToIncreaseSalary.IncreaseSalary(percentage);
 }
 
 Console.WriteLine();
-Console.WriteLine($"List count: {list.Count()}");
 
-Console.WriteLine();
-Console.WriteLine($"First 'A': {list.Find(x => x[0] == 'A')}");
-
-Console.WriteLine();
-Console.WriteLine($"Last 'A': {list.FindLast(x => x[0] == 'A')}");
-
-Console.WriteLine();
-Console.WriteLine($"Find Index 'T': {list.FindIndex(x => x[0] == 'T')}");
-
-Console.WriteLine();
-Console.WriteLine($"Find Last Index 'A': {list.FindLastIndex(x => x[0] == 'A')}");
-
-Console.WriteLine();
-Console.WriteLine("FindAll: x[2] == 'a'");
-
-List<string> filteredList = list.FindAll(x => x[1] == 'a');
-foreach (string obj in filteredList)
+Console.WriteLine("Updated list of employees:");
+foreach (Employee employee in employees)
 {
-    Console.WriteLine(obj);
-}
-
-Console.WriteLine();
-Console.WriteLine("Remove Jussara");
-
-list.Remove("Jussara");
-
-foreach (string obj in list)
-{
-    Console.WriteLine(obj);
-}
-
-Console.WriteLine();
-Console.WriteLine("RemoveAll");
-list.RemoveAll(x => x[1] == 'a');
-
-foreach (string obj in list)
-{
-    Console.WriteLine(obj);
-}
-
-Console.WriteLine();
-Console.WriteLine("Remove At");
-
-list.RemoveAt(2);
-
-foreach (string obj in list)
-{
-    Console.WriteLine(obj);
-}
-
-
-Console.WriteLine();
-Console.WriteLine("RemoveRange");
-
-list.RemoveRange(0, 1);
-
-foreach (string obj in list)
-{
-    Console.WriteLine(obj);
+    Console.WriteLine(employee);
 }
