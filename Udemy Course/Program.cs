@@ -1,24 +1,26 @@
 ﻿using System;
+using Udemy_Course;
 
-int Sum(int[] numbers) {
-    int sum = 0;
-    for (int i  = 0; i < numbers.Length; i++)
-    {
-        sum += numbers[i];
-    }
-    return sum;
-}
 
-//By using the params keyword, you can specify a method parameter that takes a variable number of arguments. The parameter type must be a single-dimensional array.
-int SumWithParams(params int[] numbers)
-{
-    int sum = 0;
-    for (int i = 0; i < numbers.Length; i++)
-    {
-        sum += numbers[i];
-    }
-    return sum;
-}
 
-Console.WriteLine(Sum(new int[] { 1, 2, 3 }));
-Console.WriteLine(SumWithParams(1, 2, 3));
+Console.WriteLine("Without ref");
+int a = 10;
+UsingRefAndOut.TripleNoRef(a);
+Console.WriteLine(a);
+
+Console.WriteLine();
+
+//The variable passed with "ref" needs to be inicialized;
+Console.WriteLine("With ref");
+int b = 10;
+UsingRefAndOut.TripleWithRef(ref b);
+Console.WriteLine(b);
+
+Console.WriteLine();
+
+//The variable passed with "out" doesnt need to be inicialized;
+Console.WriteLine("With out");
+int c = 10;
+int result;
+UsingRefAndOut.TripleWithOut(c, out result);
+Console.WriteLine(result);
