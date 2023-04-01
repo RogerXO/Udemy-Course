@@ -1,8 +1,37 @@
 ﻿using System;
 
-double[,] matriz = new double[2, 3];
+int n = int.Parse(Console.ReadLine());
 
-Console.WriteLine(matriz.Length);
-Console.WriteLine(matriz.Rank);
-Console.WriteLine(matriz.GetLength(0));
-Console.WriteLine(matriz.GetLength(1));
+int[,] matriz = new int[n,n];
+
+for(int i = 0; i <n; i++)
+{
+    string[] values = Console.ReadLine().Split(' ');
+ 
+    for (int j = 0; j < n; j++)
+    {
+        matriz[i,j] = int.Parse(values[j]);
+    }
+}
+
+Console.WriteLine("Main diagonal: ");
+for  (int i = 0;i < n; i++)
+{
+    Console.Write($"{matriz[i,i]} ");
+}
+
+int NegativeNumbers = 0;
+
+for (int i = 0; i < n ; i++)
+{
+    for (int j = 0;j < n ; j++)
+    {
+        if (matriz[i,j] < 0)
+        {
+            NegativeNumbers++;
+        }
+    }
+}
+
+Console.WriteLine();
+Console.Write($"Negative numbers: {NegativeNumbers}");
