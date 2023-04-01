@@ -1,8 +1,8 @@
 ﻿using System;
-using Udemy_Course;
 
-Static test = new Static();
+double[,] matriz = new double[2, 3];
 
-test.NotStaticText();
-
-Static.StaticText();
+Console.WriteLine(matriz.Length);
+Console.WriteLine(matriz.Rank);
+Console.WriteLine(matriz.GetLength(0));
+Console.WriteLine(matriz.GetLength(1));
