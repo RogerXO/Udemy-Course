@@ -1,37 +1,9 @@
 ﻿using System;
 
-int n = int.Parse(Console.ReadLine());
+// (condition) ? value if true : value if false
 
-int[,] matriz = new int[n,n];
+double price = double.Parse(Console.ReadLine());
 
-for(int i = 0; i <n; i++)
-{
-    string[] values = Console.ReadLine().Split(' ');
- 
-    for (int j = 0; j < n; j++)
-    {
-        matriz[i,j] = int.Parse(values[j]);
-    }
-}
+double discont = (price < 20) ? price * 0.1 : price * 0.05;
 
-Console.WriteLine("Main diagonal: ");
-for  (int i = 0;i < n; i++)
-{
-    Console.Write($"{matriz[i,i]} ");
-}
-
-int NegativeNumbers = 0;
-
-for (int i = 0; i < n ; i++)
-{
-    for (int j = 0;j < n ; j++)
-    {
-        if (matriz[i,j] < 0)
-        {
-            NegativeNumbers++;
-        }
-    }
-}
-
-Console.WriteLine();
-Console.Write($"Negative numbers: {NegativeNumbers}");
+Console.WriteLine($"{discont:F2}");
