@@ -1,9 +1,10 @@
 ﻿using System;
 
-// (condition) ? value if true : value if false
+string path = @"Documents/sistemas%20operacionais%20ta1.pdf";
 
-double price = double.Parse(Console.ReadLine());
-
-double discont = (price < 20) ? price * 0.1 : price * 0.05;
-
-Console.WriteLine($"{discont:F2}");
+Console.WriteLine($"GetDirectoryName: {Path.GetDirectoryName(path)}");
+Console.WriteLine($"GetFileName: {Path.GetFileName(path)}");
+Console.WriteLine($"GetFileNaemWithoutExtension: {Path.GetFileNameWithoutExtension(path)}");
+Console.WriteLine($"GetExtension: {Path.GetExtension(path)}");
+Console.WriteLine($"GetFullPath {Path.GetFullPath(path)}");
+Console.WriteLine($"GetTempPath: {Path.GetTempPath()}");
