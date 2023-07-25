@@ -18,7 +18,7 @@ double pricePerDay = double.Parse(Console.ReadLine());
 
 CarRental carRental = new(startDate, finishDate, new Vehicle(carModel));
 
-RentalService rentalService = new RentalService(pricePerHour, pricePerDay);
+RentalService rentalService = new RentalService(pricePerHour, pricePerDay, new BrazilTaxService());
 rentalService.ProcessInvoice(carRental);
 
 Console.WriteLine(carRental.Invoice);

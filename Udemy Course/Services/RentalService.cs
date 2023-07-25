@@ -6,13 +6,13 @@ namespace Udemy_Course.Services
     {
         public double PricePerHour { get; private set; }
         public double PricePerDay { get; private set; }
+        private ITaxService _taxService;
 
-        private BrasilTaxService _brazilTaxService = new BrasilTaxService();
-
-        public RentalService(double pricePerHour, double pricePerDay)
+        public RentalService(double pricePerHour, double pricePerDay, ITaxService taxService)
         {
             PricePerHour = pricePerHour;
             PricePerDay = pricePerDay;
+            _taxService = taxService;
         }
 
         public void ProcessInvoice(CarRental carRental)
@@ -30,7 +30,7 @@ namespace Udemy_Course.Services
                 basicPayment = PricePerDay * Math.Ceiling(duration.TotalDays);
             }
 
-            double tax = _brazilTaxService.Tax(basicPayment);
+            double tax = _taxService.CalculateTax(basicPayment);
 
             carRental.Invoice = new Invoice(basicPayment, tax);
         }

@@ -1,8 +1,8 @@
 ﻿namespace Udemy_Course.Services
 {
-    internal class BrasilTaxService
+    internal class BrazilTaxService : ITaxService
     {
-        public double Tax(double amount)
+        public double CalculateTax(double amount)
         {
             if (amount <= 100)
             {
