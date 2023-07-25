@@ -1,10 +1,24 @@
-﻿using System;
+﻿using System.Globalization;
+using Udemy_Course.Entities;
+using Udemy_Course.Services;
 
-string path = @"Documents/sistemas%20operacionais%20ta1.pdf";
+Console.WriteLine("Enter rental data");
+Console.Write("Car model: ");
+string carModel = Console.ReadLine();
 
-Console.WriteLine($"GetDirectoryName: {Path.GetDirectoryName(path)}");
-Console.WriteLine($"GetFileName: {Path.GetFileName(path)}");
-Console.WriteLine($"GetFileNaemWithoutExtension: {Path.GetFileNameWithoutExtension(path)}");
-Console.WriteLine($"GetExtension: {Path.GetExtension(path)}");
-Console.WriteLine($"GetFullPath {Path.GetFullPath(path)}");
-Console.WriteLine($"GetTempPath: {Path.GetTempPath()}");
+Console.Write("Pickup (dd/MM/yyyy hh:mm): ");
+DateTime startDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+Console.Write("Return (dd/MM/yyyy hh:mm): ");
+DateTime finishDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+
+Console.Write("Enter price per hour: ");
+double pricePerHour = double.Parse(Console.ReadLine());
+Console.Write("Enter price per day: ");
+double pricePerDay = double.Parse(Console.ReadLine());
+
+CarRental carRental = new(startDate, finishDate, new Vehicle(carModel));
+
+RentalService rentalService = new RentalService(pricePerHour, pricePerDay);
+rentalService.ProcessInvoice(carRental);
+
+Console.WriteLine(carRental.Invoice);
