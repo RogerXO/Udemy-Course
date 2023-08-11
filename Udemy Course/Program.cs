@@ -2,23 +2,28 @@
 using Udemy_Course.Entities;
 using Udemy_Course.Services;
 
-Console.WriteLine("Enter rental data");
-Console.Write("Car model: ");
-string carModel = Console.ReadLine();
+Console.WriteLine("Enter contract data");
 
-Console.Write("Pickup (dd/MM/yyyy hh:mm): ");
-DateTime startDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
-Console.Write("Return (dd/MM/yyyy hh:mm): ");
-DateTime finishDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+Console.Write("Number: ");
+int contractNumber = int.Parse(Console.ReadLine());
 
-Console.Write("Enter price per hour: ");
-double pricePerHour = double.Parse(Console.ReadLine());
-Console.Write("Enter price per day: ");
-double pricePerDay = double.Parse(Console.ReadLine());
+Console.Write("Date (dd/MM/yyyy): ");
+DateTime contractDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-CarRental carRental = new(startDate, finishDate, new Vehicle(carModel));
+Console.Write("Contract value: ");
+double contractValue = double.Parse(Console.ReadLine());
 
-RentalService rentalService = new RentalService(pricePerHour, pricePerDay, new BrazilTaxService());
-rentalService.ProcessInvoice(carRental);
+Console.Write("Enter number of installments: ");
+int numberOfInstallments = int.Parse(Console.ReadLine());
 
-Console.WriteLine(carRental.Invoice);
+Contract contract = new(contractNumber, contractDate, contractValue);
+ContractService contractService = new(new PaypalService());
+
+contractService.ProcessContract(contract, numberOfInstallments);
+
+Console.WriteLine("Installments:");
+
+ foreach (Installment installment in contract.Installments)
+{
+    Console.WriteLine(installment);
+}
