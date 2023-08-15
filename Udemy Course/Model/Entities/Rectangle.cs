@@ -2,7 +2,7 @@
 
 namespace Udemy_Course.Model.Entities
 {
-    internal class Rectangle : Shape
+    internal class Rectangle : AbstractShape
     {
         public double Width { get; set; }
         public double Height { get; set; }

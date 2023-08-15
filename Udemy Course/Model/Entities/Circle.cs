@@ -2,7 +2,7 @@
 
 namespace Udemy_Course.Model.Entities
 {
-    internal class Circle : Shape
+    internal class Circle : AbstractShape
     {
         public double Radius { get; set; }
 
