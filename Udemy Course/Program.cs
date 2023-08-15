@@ -1,29 +1,8 @@
-﻿using System.Globalization;
-using Udemy_Course.Entities;
-using Udemy_Course.Services;
+﻿using Udemy_Course.Model.Entities;
+using Udemy_Course.Model.Enums;
 
-Console.WriteLine("Enter contract data");
+Shape rectangle = new Rectangle() { Width = 2, Height = 3, Color = Color.Black };
+Shape circle = new Circle() { Radius = 2, Color = Color.White};
 
-Console.Write("Number: ");
-int contractNumber = int.Parse(Console.ReadLine());
-
-Console.Write("Date (dd/MM/yyyy): ");
-DateTime contractDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-Console.Write("Contract value: ");
-double contractValue = double.Parse(Console.ReadLine());
-
-Console.Write("Enter number of installments: ");
-int numberOfInstallments = int.Parse(Console.ReadLine());
-
-Contract contract = new(contractNumber, contractDate, contractValue);
-ContractService contractService = new(new PaypalService());
-
-contractService.ProcessContract(contract, numberOfInstallments);
-
-Console.WriteLine("Installments:");
-
- foreach (Installment installment in contract.Installments)
-{
-    Console.WriteLine(installment);
-}
+Console.WriteLine(rectangle);
+Console.WriteLine(circle);
