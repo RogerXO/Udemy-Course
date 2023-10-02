@@ -1,8 +1,14 @@
-﻿using Udemy_Course.Model.Entities;
-using Udemy_Course.Model.Enums;
+﻿using Udemy_Course.Devices;
 
-IShape rectangle = new Rectangle() { Width = 2, Height = 3, Color = Color.Black };
-IShape circle = new Circle() { Radius = 2, Color = Color.White};
+Printer printer = new Printer() { SerialNumber = 123 };
+printer.ProcessDoc("document");
+printer.Print("A4 paper");
 
-Console.WriteLine(rectangle);
-Console.WriteLine(circle);
+Scanner scanner = new Scanner() { SerialNumber = 456 };
+scanner.ProcessDoc("pdf");
+Console.WriteLine(scanner.Scan());
+
+ComboDevice comboDevice = new ComboDevice();
+comboDevice.ProcessDoc("Nubank Bill");
+Console.WriteLine(comboDevice.Scan());
+comboDevice.Print("papel pro baseado");
