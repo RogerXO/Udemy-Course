@@ -1,14 +1,28 @@
-﻿using Udemy_Course.Devices;
+﻿using Udemy_Course.Entities;
 
-Printer printer = new Printer() { SerialNumber = 123 };
-printer.ProcessDoc("document");
-printer.Print("A4 paper");
+string path = @"C:\Users\User\Documents\poc.txt";
 
-Scanner scanner = new Scanner() { SerialNumber = 456 };
-scanner.ProcessDoc("pdf");
-Console.WriteLine(scanner.Scan());
+try
+{
+    using (StreamReader sr = File.OpenText(path))
+    {
+        List<Employee> list = new();
 
-ComboDevice comboDevice = new ComboDevice();
-comboDevice.ProcessDoc("Nubank Bill");
-Console.WriteLine(comboDevice.Scan());
-comboDevice.Print("papel pro baseado");
+        while (!sr.EndOfStream)
+        {
+            list.Add(new Employee(sr.ReadLine()));
+        }
+        list.Sort();
+
+        foreach (Employee emp in list)
+        {
+            Console.WriteLine(emp);
+        }
+    }
+}
+
+catch (IOException e)
+{
+    Console.WriteLine("An error occurred");
+    Console.WriteLine(e.Message);
+}
