@@ -3,7 +3,7 @@
 Console.Write("How many values? ");
 int x = int.Parse(Console.ReadLine());
 
-PrintService printService = new();
+PrintService<int> printService = new();
 
 for (int i = 0; i < x; i++)
 {
