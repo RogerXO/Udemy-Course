@@ -1,28 +1,17 @@
-﻿using Udemy_Course.Entities;
+﻿using Udemy_Course;
 
-string path = @"C:\Users\User\Documents\poc.txt";
+Console.Write("How many values? ");
+int x = int.Parse(Console.ReadLine());
 
-try
+PrintService printService = new();
+
+for (int i = 0; i < x; i++)
 {
-    using (StreamReader sr = File.OpenText(path))
-    {
-        List<Employee> list = new();
-
-        while (!sr.EndOfStream)
-        {
-            list.Add(new Employee(sr.ReadLine()));
-        }
-        list.Sort();
-
-        foreach (Employee emp in list)
-        {
-            Console.WriteLine(emp);
-        }
-    }
+    int value = int.Parse(Console.ReadLine());
+    printService.AddValue(value);
 }
 
-catch (IOException e)
-{
-    Console.WriteLine("An error occurred");
-    Console.WriteLine(e.Message);
-}
+printService.Print();
+Console.WriteLine($"First: {printService.First()}");
+
+
