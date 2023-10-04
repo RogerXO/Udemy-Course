@@ -1,17 +1,19 @@
-﻿using Udemy_Course;
+﻿using System.Globalization;
+using Udemy_Course.Entities;
+using Udemy_Course.Services;
 
-Console.Write("How many values? ");
-int x = int.Parse(Console.ReadLine());
+List<Product> list = new();
 
-PrintService<int> printService = new();
+Console.Write("Enter N: ");
+int objQuantity = int.Parse(Console.ReadLine()!);
 
-for (int i = 0; i < x; i++)
+for (int i = 0; i < objQuantity; i++)
 {
-    int value = int.Parse(Console.ReadLine());
-    printService.AddValue(value);
+    string[] vect = Console.ReadLine().Split(',');
+    string name = vect[0];
+    double price = double.Parse(vect[1], CultureInfo.InvariantCulture);
+    list.Add(new Product(name, price));
 }
 
-printService.Print();
-Console.WriteLine($"First: {printService.First()}");
-
-
+Console.Write("Max: ");
+Console.WriteLine(CalculationService.Max<Product>(list));
