@@ -1,19 +1,44 @@
-﻿using System.Globalization;
-using Udemy_Course.Entities;
-using Udemy_Course.Services;
+﻿// HashSet is ultra fast but has no itens order
+HashSet<string> set = new();
 
-List<Product> list = new();
+set.Add("Mouse");
+set.Add("Keyboard");
+set.Add("Gaming chair");
 
-Console.Write("Enter N: ");
-int objQuantity = int.Parse(Console.ReadLine()!);
+Console.WriteLine(set.Contains("Monitro"));
 
-for (int i = 0; i < objQuantity; i++)
+set.Add("Mouse");
+
+foreach (string element in set)
 {
-    string[] vect = Console.ReadLine().Split(',');
-    string name = vect[0];
-    double price = double.Parse(vect[1], CultureInfo.InvariantCulture);
-    list.Add(new Product(name, price));
+    Console.WriteLine(element);
 }
 
-Console.Write("Max: ");
-Console.WriteLine(CalculationService.Max<Product>(list));
+// SortedSet is fast and your itens order follow IComparer<T> implementation
+SortedSet<int> par = new() { 0,2,4,6,8,10 };
+SortedSet<int> impar = new() { 1, 3, 5, 7, 9 };
+PrintCollection(par);
+
+// union
+SortedSet<int> union = new(par);
+union.UnionWith(impar);
+PrintCollection(union);
+
+// intersection 
+SortedSet<int> intersection = new(par);
+intersection.IntersectWith(impar);
+PrintCollection(intersection);
+
+// difference
+SortedSet<int> remove = new(par);
+remove.ExceptWith(impar);
+PrintCollection(remove);
+
+void PrintCollection<T>(IEnumerable<T> collection)
+{
+    foreach (T item in collection)
+    {
+        Console.Write(item + " ");
+    }
+    Console.WriteLine();
+}
