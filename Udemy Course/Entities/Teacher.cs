@@ -3,8 +3,8 @@
     internal class Teacher
     {
         public string Name { get; set; }
-        private SortedSet<string> _courses = new() { "A", "B", "C"};
-        private SortedSet<Student> _students = new();
+        private HashSet<Course> _courses = new();
+        private HashSet<Student> _students = new();
 
         public Teacher(string name)
         {
@@ -13,22 +13,32 @@
 
         public void AddCourse(string courseName)
         {
-            _courses.Add(courseName);
+            _courses.Add(new Course(courseName));
         }
 
-        public SortedSet<string> GetCourses()
+        public HashSet<Course> GetCourses()
         {
             return _courses;
         }
 
-        public void AddStudent(Student student)
+        public void AddStudentToCourse(string courseName,Student student)
         {
-            _students.Add(student);
+            Course course= _courses.First(x => x.Name == courseName);
+
+            if (course != null)
+            {
+                course.AddStudent(student);
+            }
         }
 
         public int GetStudentsCount()
         {
-            return _students.Count();
+            foreach(Course course in _courses)
+            {
+                _students.UnionWith(course.GetStudents());
+            }
+
+            return _students.Count;
         }
     }
 }
