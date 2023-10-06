@@ -1,44 +1,19 @@
-﻿// HashSet is ultra fast but has no itens order
-HashSet<string> set = new();
+﻿using Udemy_Course.Entities;
 
-set.Add("Mouse");
-set.Add("Keyboard");
-set.Add("Gaming chair");
+HashSet<Product> products = new();
+products.Add(new Product("TV", 900));
+products.Add(new Product("Notebook", 1200));
 
-Console.WriteLine(set.Contains("Monitro"));
+Product prod = new("Notebook", 1200);
+// If the reference type Product doesnt implements GetHashCode and Equals it will return false because in this case HashSet will compare the object memory reference, and as they are two differents instanced values they have two differents memory reference.
+// But if GetHashCode and Equals methods are implementeds in Product, HashSet will compare the content
+Console.WriteLine(products.Contains(prod));
 
-set.Add("Mouse");
 
-foreach (string element in set)
-{
-    Console.WriteLine(element);
-}
+HashSet<Point> points = new();
+points.Add(new Point(1, 2));
+points.Add(new Point(5, 10));
 
-// SortedSet is fast and your itens order follow IComparer<T> implementation
-SortedSet<int> par = new() { 0,2,4,6,8,10 };
-SortedSet<int> impar = new() { 1, 3, 5, 7, 9 };
-PrintCollection(par);
-
-// union
-SortedSet<int> union = new(par);
-union.UnionWith(impar);
-PrintCollection(union);
-
-// intersection 
-SortedSet<int> intersection = new(par);
-intersection.IntersectWith(impar);
-PrintCollection(intersection);
-
-// difference
-SortedSet<int> remove = new(par);
-remove.ExceptWith(impar);
-PrintCollection(remove);
-
-void PrintCollection<T>(IEnumerable<T> collection)
-{
-    foreach (T item in collection)
-    {
-        Console.Write(item + " ");
-    }
-    Console.WriteLine();
-}
+Point point = new(5,10);
+Console.WriteLine(points.Contains(point));
+// Point was implemented as struct and in this case the HashSet compare the itens content
