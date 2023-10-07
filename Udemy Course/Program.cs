@@ -1,29 +1,26 @@
-﻿using Udemy_Course.Entities;
+﻿Dictionary<string, string> cookies = new();
 
-try
+cookies["user"] = "maria";
+cookies["email"] = "maria@gmail.com";
+cookies.Add("phone", "999999999");
+
+Console.WriteLine(cookies["phone"]);
+
+cookies.Remove("phone");
+
+if (cookies.ContainsKey("phone"))
 {
-    Teacher teacher = new("Alex");
-
-    teacher.AddCourse("A");
-    teacher.AddCourse("B");
-    teacher.AddCourse("C");
-
-    HashSet<Course> courses = teacher.GetCourses();
-
-    foreach (Course course in courses)
-    {
-        Console.Write($"How many students for course {course.Name}? ");
-        int studentsQuantity = int.Parse(Console.ReadLine());
-
-        for (int i = 0; i < studentsQuantity; i++)
-        {
-            int studentCode = int.Parse(Console.ReadLine());
-            teacher.AddStudentToCourse(course.Name,new Student(studentCode));
-        }
-    }
-    Console.WriteLine($"Total students: {teacher.GetStudentsCount()}");
+    Console.WriteLine("Phone: " + cookies["email"]);
 }
-catch (IOException e)
+else
 {
-    Console.WriteLine(e.Message);
+    Console.WriteLine("There is no 'phone' key");
+}
+
+Console.WriteLine("Size: " + cookies.Count);
+
+Console.WriteLine("All cookies:");
+foreach (KeyValuePair<string, string> item in cookies)
+{
+    Console.WriteLine($"{item.Key}: {item.Value}");
 }
