@@ -1,26 +1,36 @@
-﻿Dictionary<string, string> cookies = new();
+﻿string path = @"C:\\Users\\User\\Documents\\poc.txt";
 
-cookies["user"] = "maria";
-cookies["email"] = "maria@gmail.com";
-cookies.Add("phone", "999999999");
-
-Console.WriteLine(cookies["phone"]);
-
-cookies.Remove("phone");
-
-if (cookies.ContainsKey("phone"))
+try
 {
-    Console.WriteLine("Phone: " + cookies["email"]);
+    Console.WriteLine($"The path is: {path}");
+
+    Dictionary<string, int> candidates = new();
+
+    using (StreamReader sr = File.OpenText(path))
+    {
+        while (!sr.EndOfStream)
+        {
+            string[] votingRecord = sr.ReadLine().Split(",");
+            string candidate = votingRecord[0];
+            int votes = int.Parse(votingRecord[1]);
+
+            if (candidates.ContainsKey(candidate))
+            {
+                candidates[candidate] += votes;
+            }
+            else
+            {
+                candidates.Add(candidate, votes);
+            }
+        }
+    }
+
+    foreach (KeyValuePair<string,int> item in candidates)
+    {
+        Console.WriteLine($"{item.Key}: {item.Value}");
+    }
 }
-else
+catch (IOException e)
 {
-    Console.WriteLine("There is no 'phone' key");
-}
-
-Console.WriteLine("Size: " + cookies.Count);
-
-Console.WriteLine("All cookies:");
-foreach (KeyValuePair<string, string> item in cookies)
-{
-    Console.WriteLine($"{item.Key}: {item.Value}");
+    Console.WriteLine(e.Message);
 }
