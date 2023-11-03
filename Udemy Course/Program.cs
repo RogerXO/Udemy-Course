@@ -1,7 +1,13 @@
-﻿DateTime dt = new(2023, 10, 28, 11, 21, 45);
-Console.WriteLine(dt.ElapsedTime());
+﻿using Udemy_Course.Entities;
 
-Console.WriteLine();
+List<Product> list = new();
 
-string s1 = "Good morning dear students!";
-Console.WriteLine(s1.Cut(10));
+list.Add(new Product("Tv", 900));
+list.Add(new Product("Notebook", 1200));
+list.Add(new Product("Tablet", 450));
+
+list.Sort();
+
+foreach(Product item in list) {
+    Console.WriteLine(item);
+}
