@@ -1,14 +1,21 @@
-﻿using Udemy_Course.Entities;
+﻿using Udemy_Course.Services;
 
-List<Product> list = new();
+namespace Udemy_Couse
+{
+    //delegate
+    delegate double BinaryNumericOperation(double n1, double n2);
 
-list.Add(new Product("Tv", 900));
-list.Add(new Product("Notebook", 1200));
-list.Add(new Product("Tablet", 450));
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double a = 10;
+            double b = 12;
 
-list.Sort((p1, p2) => p1.Name.ToUpper().CompareTo(p2.Name.ToUpper()));
+            BinaryNumericOperation op = CalculationService.Sum;
 
-foreach(Product item in list) {
-    Console.WriteLine(item);
+            double result = op(a, b);
+            Console.WriteLine(result);
+        }
+    }
 }
-
