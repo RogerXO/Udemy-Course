@@ -3,7 +3,7 @@
 namespace Udemy_Couse
 {
     //delegate
-    delegate double BinaryNumericOperation(double n1, double n2);
+    delegate void BinaryNumericOperation(double n1, double n2);
 
     class Program
     {
@@ -12,10 +12,13 @@ namespace Udemy_Couse
             double a = 10;
             double b = 12;
 
-            BinaryNumericOperation op = CalculationService.Sum;
+            BinaryNumericOperation op = CalculationService.ShowSum;
+            op += CalculationService.ShowMax;
 
-            double result = op(a, b);
-            Console.WriteLine(result);
+            // op.Invoke(a, b);
+            // or
+            // op(a, b);
+            op(a, b);
         }
     }
 }
