@@ -16,12 +16,14 @@ namespace Udemy_Couse
             list.Add(new Product("Tablet", 350));
             list.Add(new Product("HD Case", 89.90));
 
-            //You can do this way
-            list.RemoveAll(p => p.Price >= 100);
+            Action<Product> act = UpdatePrice;
+            Action<Product> act1 = p => { p.Price += p.Price * 0.1; };
 
-            //Or using the predicate
-            list.RemoveAll(ProductTest);
-
+            //There are many ways of to pass an Action<>, see they above:
+            list.ForEach(UpdatePrice);
+            //list.ForEach(act);
+            // list.ForEach(act1);
+            //list.ForEach(p => { p.Price += p.Price * 0.1; });
 
             foreach(Product p in list)
             {
@@ -29,9 +31,9 @@ namespace Udemy_Couse
             }
         }
 
-        public static bool ProductTest(Product p)
+        static void UpdatePrice(Product p)
         {
-            return p.Price >= 100;
+            p.Price += p.Price * 0.1;
         }
     }
 }
