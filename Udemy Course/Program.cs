@@ -9,31 +9,33 @@ namespace Udemy_Couse
     {
         static void Main(string[] args)
         {
-            List<Product> list = new();
-
-            list.Add(new Product("Tv", 900));
-            list.Add(new Product("Mouse", 50));
-            list.Add(new Product("Tablet", 350));
-            list.Add(new Product("HD Case", 89.90));
-
-            Action<Product> act = UpdatePrice;
-            Action<Product> act1 = p => { p.Price += p.Price * 0.1; };
-
-            //There are many ways of to pass an Action<>, see they above:
-            list.ForEach(UpdatePrice);
-            //list.ForEach(act);
-            // list.ForEach(act1);
-            //list.ForEach(p => { p.Price += p.Price * 0.1; });
-
-            foreach(Product p in list)
+            List<Product> list = new()
             {
-                Console.WriteLine(p);
+                new Product("Tv", 900),
+                new Product("Mouse", 50),
+                new Product("Tablet", 350),
+                new Product("HD Case", 89.90)
+            };
+
+            Func<Product, string> func = NameUpper;
+            Func<Product, string> func1 = p => p.Name.ToUpper();
+
+
+            // List<string> result = list.Select(NameUpper).ToList();
+            // List<string> result = list.Select(func).ToList();
+            //List<string> result = list.Select(func1).ToList();
+            List<string> result = list.Select(p => p.Name.ToUpper()).ToList();
+
+
+            foreach (string item in result)
+            {
+                Console.WriteLine(item);
             }
         }
 
-        static void UpdatePrice(Product p)
+        static string NameUpper(Product p)
         {
-            p.Price += p.Price * 0.1;
+            return p.Name.ToUpper();
         }
     }
 }
